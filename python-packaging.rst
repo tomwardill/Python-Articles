@@ -1,4 +1,4 @@
-Simple guide to Python Packaging
+A Guide to Python Packaging
 ================================
 
 Introduction
@@ -35,6 +35,12 @@ Eggs
 The chosen method of python packaging is called 'Eggs' (as pythons lay eggs. Don't look at me, I'm not responsible for the name.). Eggs are a compressed archive (tarball or zip file) of the python code and accompanying files, with some metadata embedded into them to describe the structure and names.
 If you are familiar with linux systems, eggs are roughly correspondent to a .deb or .rpm, with a similar ecosystem around the installation and maintenance.
 
+An aside about setuptools
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The core mechanisms of python packaging live in a module called `setuptools`. This ships with most python distributions, and is included in python 3 and above. There are a few legacy versions of setuptools (which are mostly compatible, and mostly differ only on implementation details), the current method of choice is `distribute` (or distribute2 for python3).
+As you will see below, setuptools is the main engine that enables both the creation of python packages, and the installation and maintenance of the same.
+
 Installing an egg
 ~~~~~~~~~~~~~~~~~
 
@@ -44,3 +50,45 @@ Most python programmers will have come across either `easy_install` or `pip`. Th
 
 By default, these tools will look for the egg on pypi (http://pypi.python.org), which is a egg distribution site and repository that contains most of the publicly released python code in egg form.
 A later article will cover using the more advanced installation tool `buildout`.
+
+Components of a Egg
+-------------------
+
+Most python eggs has 3 basic components:
+
+ 1. A `setup.py`
+ 2. Some code
+ 3. Accompanying documents
+
+setup.py
+~~~~~~~~
+
+The setup.py is the main engine of an egg, it contains the metadata, package and namespace information that will determine how the egg behaves, and what is packaged into the archive when they are created.
+At it's core, the setup.py is simply a call to a python method from setuptools (or distribute), with the parameters to the method being the information relevant to that package.
+
+There is a large list of available parameters, some of which are required to make a valid egg, and others that are very rarely, if ever used. For the full list of options, see the python documentation on making eggs << insert link here >>
+
+A basic setup.py will look something like this::
+
+    from setuptools import setup, find_packages
+
+	setup(
+	    name = 'a sample egg',
+	    version = '0.0.1',
+	    description = "a short description",
+	    long_description = "a longer description of what this egg does",
+	    author = "Tom Wardill",
+	    author_email = "tom@howrandom.net",
+	    url = "http://github.com/tomwardill",
+	    license = "GPL",
+	    packages = find_packages(),
+	    include_package_data = True,
+	    zip_safe = False,
+	    )
+
+Some of this is reasonably obvious what it does, others involve various levels of setuptools magic, and will not be immediately obvious, particularly `find_packages` and `include_package_data`. This basic skeleton with another couple of files will suffice to package an egg from your code.
+
+Package Layout
+~~~~~~~~~~~~~~
+
+There are many different ways to layout the file structure of your package. In this section, I have chosen a simple method that will work in most situations, with the default options in setuptools.
