@@ -32,3 +32,15 @@ I'm hoping that the two questions above have given you enough information to ans
 Eggs
 ----
 
+The chosen method of python packaging is called 'Eggs' (as pythons lay eggs. Don't look at me, I'm not responsible for the name.). Eggs are a compressed archive (tarball or zip file) of the python code and accompanying files, with some metadata embedded into them to describe the structure and names.
+If you are familiar with linux systems, eggs are roughly correspondent to a .deb or .rpm, with a similar ecosystem around the installation and maintenance.
+
+Installing an egg
+~~~~~~~~~~~~~~~~~
+
+Most python programmers will have come across either `easy_install` or `pip`. This is a simple method of downloading an egg and installing it to your local system::
+
+  >> easy_install Django
+
+By default, these tools will look for the egg on pypi (http://pypi.python.org), which is a egg distribution site and repository that contains most of the publicly released python code in egg form.
+A later article will cover using the more advanced installation tool `buildout`.
