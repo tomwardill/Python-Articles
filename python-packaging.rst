@@ -38,7 +38,7 @@ If you are familiar with linux systems, eggs are roughly correspondent to a .deb
 An aside about setuptools
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The core mechanisms of python packaging live in a module called `setuptools`. This ships with most python distributions, and is included in python 3 and above. There are a few legacy versions of setuptools (which are mostly compatible, and mostly differ only on implementation details), the current method of choice is `distribute` (or distribute2 for python3).
+The core mechanisms of python packaging live in a module called `setuptools`. This ships with most python distributions, and is included in python 3 and above. There are a few legacy versions of setuptools (which are mostly compatible, and mostly differ only on implementation details), the current method of choice is `distribute` (or `distutils2` for python3).
 As you will see below, setuptools is the main engine that enables both the creation of python packages, and the installation and maintenance of the same.
 
 Installing an egg
@@ -92,3 +92,15 @@ Package Layout
 ~~~~~~~~~~~~~~
 
 There are many different ways to layout the file structure of your package. In this section, I have chosen a simple method that will work in most situations, with the default options in setuptools.
+
+Assume that you have a python module named `robopicker`. This module consists of 3 python files (`first.py`, `second.py` and `third.py`), and a data file (`data.json`).
+
+I would lay this module out on disk like this::
+
+  > setup.py
+  > MANIFEST.in
+  > robopicker/
+    > first.py
+    > second.py
+    > third.py
+    > data.json
