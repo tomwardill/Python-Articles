@@ -98,9 +98,28 @@ Assume that you have a python module named `robopicker`. This module consists of
 I would lay this module out on disk like this::
 
   > setup.py
+  > README.rst
   > MANIFEST.in
   > robopicker/
     > first.py
     > second.py
     > third.py
-    > data.json
+    > data/
+      > data.json
+
+This layout gives a clear indication as to what is your code, and what is metadata about the package that will contain your code. There are other ways to do it that are valid, I happen to prefer this one.
+
+`MANIFEST.in` and `include_package_data`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+These two things are related. MANIFEST.in is a text file containing descriptions of what none-code files you would like to include in your egg. 
+`include_package_data` is the parameter to the `setup` method in `setup.py` which tells setuptools to include extraneous data into the egg.
+
+The simplest way to include none-code files into your egg is to set `include_package_data` to `True` and specify the files that you want in the `MANIFEST.in`.
+
+Using the sample `setup.py` from above, this `MANIFEST.in` would be enough to include the files that we want::
+
+  include README.rst
+  recursive-include robopicker/data/*
+
+As can be seen, file globbing and wildcards are supported by the `MANIFEST.in`, and the command structure is fairly simple. For a more detailed explanation of all the available options, see the official documentation (http://docs.python.org/distutils/sourcedist.html#the-manifest-in-template)
