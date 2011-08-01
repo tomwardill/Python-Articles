@@ -52,7 +52,7 @@ By default, these tools will look for the egg on pypi (http://pypi.python.org), 
 A later article will cover using the more advanced installation tool `buildout`.
 
 Components of an Egg
--------------------
+--------------------
 
 Most python eggs has 3 basic components:
 
@@ -123,3 +123,17 @@ Using the sample `setup.py` from above, this `MANIFEST.in` would be enough to in
   recursive-include robopicker/data/*
 
 As can be seen, file globbing and wildcards are supported by the `MANIFEST.in`, and the command structure is fairly simple. For a more detailed explanation of all the available options, see the official documentation (http://docs.python.org/distutils/sourcedist.html#the-manifest-in-template)
+
+README files
+~~~~~~~~~~~~
+
+`README` files are reasonably straightforward to explain, they are a description of your project, in text format that can be extracted from the egg and distributed alongside it. In the example above, I have chosen to use a `reStructuredText` (.rst) format README file.
+This is not supported as a default by setuptools, which will look for either `README` or `README.txt`. However, sites like github.com and pypi.python.org will render a .rst format file, and make a pretty page out of it, rather than just a plain text file.
+
+The `MANIFEST.in` detailed above will include the README.rst into the egg, where it can be read by pypi, and github.com will read the file out of the root of the source tree.
+
+The final trick that could be done with this is to alter the setup.py `long_description` to look something like this::
+
+  long_description = open('README.rst').read(),
+
+Which will then include the contents of the .rst into the `long_description` field of the metadata for the egg.
