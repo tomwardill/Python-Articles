@@ -51,7 +51,7 @@ Most python programmers will have come across either `easy_install` or `pip`. Th
 By default, these tools will look for the egg on pypi (http://pypi.python.org), which is a egg distribution site and repository that contains most of the publicly released python code in egg form.
 A later article will cover using the more advanced installation tool `buildout`.
 
-Components of a Egg
+Components of an Egg
 -------------------
 
 Most python eggs has 3 basic components:
