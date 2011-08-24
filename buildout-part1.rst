@@ -38,7 +38,7 @@ Once you have activated this environment, you can then easy_install or pip insta
 
 So, if virtualenv can solve this problem for us, why do we need something else, something more complex to solve essentially the same problem?
 
-The answer, is that buildout doesn't just solve this problem, it solves a whole lot more problems, particuarly when it comes to 'how do I release this code to production, yet make sure I can still work on it, without breaking the release?'
+The answer is that buildout doesn't just solve this problem, it solves a whole lot more problems, particuarly when it comes to 'how do I release this code to production, yet make sure I can still work on it, without breaking the release?'
 
 Building something with buildout
 --------------------------------
@@ -48,7 +48,7 @@ The intent is to show you the parts for a buildout config, then show how it all 
 Config Files
 ~~~~~~~~~~~~
 
-Pretty much everything that happens with buildout is controlled by its config file (this isn't quite true, but hey, 'basics'). A config file is a simple ini (``ConfigParser``) style text file; that defines some sections, some options for those sections, and some choices in the options.
+Pretty much everything that happens with buildout is controlled by its config file (this isn't quite true, but hey, 'basics'). A config file is a simple ini (``ConfigParser``) style text file that defines some sections, some options for those sections, and some choices in the options.
 
 In this case, the sections of a buildout config file (henceforth referred to as ``buildout.cfg``) are generally referred to as ``parts``. The most important of these parts is the ``buildout`` part itself, which controls the options for the buildout process.
 
@@ -57,7 +57,7 @@ An absolute minimum buildout part looks something like this::
  [buildout]
  parts = noseinstall
 
-While this is not a complete buildout.cfg, it is the minimum that is required in the buildout part itself. All is is doing is listing the other parts that buildout will use to actually do something, in this case, it is looking for a single part named ``noseinstall``. As this part doesn't exist yet, it won't actually work. So, lets add the part, and in the next section, see what it does::
+While this is not a complete buildout.cfg, it is the minimum that is required in the buildout part itself. All is doing is listing the other parts that buildout will use to actually do something, in this case, it is looking for a single part named ``noseinstall``. As this part doesn't exist yet, it won't actually work. So, lets add the part, and in the next section, see what it does::
 
  [buildout]
  parts = noseinstall
@@ -96,9 +96,9 @@ At this point, buildout will output something along the lines of::
   Generated script '/home/tomwardill/tmp/buildoutwriteup/bin/nosetests-2.6'.
   Generated script '/home/tomwardill/tmp/buildoutwriteup/bin/nosetests'.
 
-Your output may not be exactly similar, but should contain broadly those lines.
+Your output may not be exactly the same, but should contain broadly those lines.
 
-The simple sample here is using the zc.recipe.egg recipe. This is probably the most common of all buildout recipes as it is the one that will do the heavy work of downloading an egg, analysing its setup.py for dependencies (and installing them if required), and then finally installing the egg into the buildout path for use. Recipes are just python eggs that contain code that buildout will run. The easiest way to think of this is that while a recipe is an egg, recipe contains instructions for the buildout process itself, and therefore will not be available to code at the end.
+The simple sample here is using the zc.recipe.egg recipe. This is probably the most common of all buildout recipes as it is the one that will do the heavy work of downloading an egg, analysing its setup.py for dependencies (and installing them if required), and then finally installing the egg into the buildout path for use. Recipes are just python eggs that contain code that buildout will run. The easiest way to think of this is that while a recipe is an egg, a recipe contains instructions for the buildout process itself, and therefore will not be available to code at the end.
 
 An analysis of the buildout output shows exactly what it has done. It has downloaded an egg for ``zc.recipe.egg`` and run the ``noseinstall`` part. Let's take a closer look at that noseinstall part from before::
 
@@ -118,7 +118,7 @@ As you can see from the bottom of the buildout output, the recipe has downloaded
  OK
  $>
 
-We can see that this is nose, as we expect it to be. Two files have been generated because that is that the setup.py for Nose defines, a base nosetest executable, and one for the specifc python version that we have used (python 2.6 in my case). These are specified in the setup.py that makes up the nose egg, which will be covered in a later article.
+We can see that this is nose, as we expect it to be. Two files have been generated because that is what the setup.py for Nose defines, a base nosetest executable, and one for the specifc python version that we have used (python 2.6 in my case). These are specified in the setup.py that makes up the nose egg, which will be covered in a later article.
 
 Conclusion
 ----------
